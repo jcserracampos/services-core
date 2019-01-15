@@ -1,0 +1,8 @@
+kind: pipeline
+name: default
+
+steps:
+- name: 'test_service_core_db'
+  image: comum/docker-build-env:latest
+  commands:
+    - cd services/service-core-db && ./run_sql_tests_with_docker.sh
