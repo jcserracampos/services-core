@@ -34,9 +34,8 @@ const dashboardSubscriptionCardDetailPaymentHistoryEntry = {
             paymentDetails = args.payment.payment_method_details,
             paymentMethodText = I18n.t(`${paymentMethod}`, I18nScopePaymentMethod()),
             paymentStatusText = I18n.t(`last_status.${paymentMethod}.${paymentStatus}`, I18nScopePayment()),
-            paymentMethodEndText = paymentMethod === 'boleto' ? 
-                ` com venc. ${moment(paymentDetails.expiration_date).format('DD/MM')}` : 
-                ` ${captalize(paymentDetails.brand)} final ${paymentDetails.last_digits}`;
+            paymentMethodEndText = (paymentMethod === 'boleto' ?
+                ` com venc. ${moment(paymentDetails.expiration_date).format('DD/MM')}` : ( !_.isNull(paymentDetails.brand) && !_.isNull(paymentDetails.last_digits) ? ` ${captalize(paymentDetails.brand)} final ${paymentDetails.last_digits}` : ''));
 
         return m('.fontsize-smallest.w-row',
             [
