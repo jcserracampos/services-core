@@ -133,6 +133,24 @@ const fetchUser = (user_id, handlePromise = true, customProp = currentUser) => {
     return !handlePromise ? lUser.load() : lUser.load().then(_.compose(customProp, _.first));
 };
 
+
+const currentUserFromRailsRequest = () => {
+    return m.request({
+        method: 'GET',
+        config: h.setCsrfToken,
+        url: '/current_user'
+    });
+};
+
+
+const getCurrentUserIdFromRails = () => {
+    return currentUserFromRailsRequest().then(data => data.id).catch(err => null)
+};
+
+const withCurrentUserIdFromDevise = (success, failed) => {
+    return currentUserFromRailsRequest.then(success).catch(failed);
+};
+
 const getCurrentUser = () => {
     fetchUser(h.getUserID());
     return currentUser;

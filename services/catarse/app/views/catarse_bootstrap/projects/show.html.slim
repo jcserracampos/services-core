@@ -30,7 +30,7 @@
 
 - parameters = { project_id: @project.id, project_user_id: @project.user_id, user_id: @project.user_id }.to_json
 
-#application[data-parameters=parameters data-stats=@project.to_analytics_json]
+#application[data-parameters=parameters data-stats=@project.to_analytics_json data-user=current_user.try(:to_analytics_json)]
 
 - content_for :application_js do
   = javascript_include_tag "api/application"

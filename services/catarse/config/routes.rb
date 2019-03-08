@@ -59,6 +59,7 @@ Catarse::Application.routes.draw do
         get :unsubscribe, to: 'categories/subscriptions#destroy'
       end
     end
+    resource :current_user, controller: 'current_user_session'
     resources :auto_complete_projects, only: [:index]
     resources :auto_complete_cities, only: [:index]
     resources :rewards, only: [] do
